@@ -22,7 +22,7 @@ def multi_head_attention(Q: np.ndarray, K: np.ndarray, V: np.ndarray,
     v = v.reshape(batch, seq, num_heads, dk).transpose(0, 2, 1, 3)
     
     scores = q @ k.transpose(0, 1, 3, 2)
-    scores = (scores / scores **0.5) @ v
+    scores = (scores / dk **0.5) @ v
     attn = softmax(scores)
     out = attn.transpose(0, 2, 1, 3).reshape(batch, seq, d_model)
 
